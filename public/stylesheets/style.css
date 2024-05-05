@@ -22,6 +22,11 @@ h1 {
   font-family: 'Times New Roman', Times, serif;
   }
 
+  form{
+    display: flex;
+    gap: 5px;
+  }
+
 .fa-list-check{
   color:#fff;
 }
@@ -35,7 +40,7 @@ h1 {
 .divTareas {
   padding: 0;
   margin: 0;
-  width: 40%;
+  width: 50%;
 }
 .divTareas{
   box-shadow: 5px 5px 5px #000000ac;
@@ -43,10 +48,9 @@ h1 {
 }
 
 .inputTarea,
-.btnAgregar {
+.btnAgregar, .fecha {
   border-radius: 3px;
   border: none;
-  padding: 4px;
   cursor: pointer;
   padding: 7px 20px;
   box-shadow: 5px 5px 5px #000000ac;
@@ -56,11 +60,17 @@ h1 {
   padding: 7px 55px;
 }
 
-.inputTarea:focus {
+.inputTarea:focus, .fecha:focus {
   outline: none;
   /* Quitar el borde predeterminado */
   border: none;
   /* Quitar cualquier borde personalizado */
+}
+
+.fecha{
+padding: 0;
+width: auto;
+color: black;
 }
 
 .btnAgregar {

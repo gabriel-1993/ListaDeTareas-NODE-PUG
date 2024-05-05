@@ -105,7 +105,6 @@ router.post('/add', function(req, res, next) {
 
       if (existingTask) {
         // Si la tarea ya existe, renderizar la página con un mensaje de error
-        res.render('index', { title: 'ToDo List', tasks: todoList.tasks, errorMessage: '¡La tarea ya existe en la lista!' });
         return; // Salir de la función para evitar agregar la tarea duplicada
       }
 
@@ -113,7 +112,8 @@ router.post('/add', function(req, res, next) {
       var newTask = {
         id: todoList.tasks.length > 0 ? todoList.tasks[todoList.tasks.length - 1].id + 1 : 1,
         title: newTaskTitle,
-        completed: false
+        completed: false,
+        FechaLimite: req.body.taskDeadline // Asegúrate de enviar esta información desde el formulario
       };
 
       // Agregar la nueva tarea a la lista

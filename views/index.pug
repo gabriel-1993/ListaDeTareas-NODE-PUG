@@ -9,6 +9,7 @@ block content
     // Formulario para agregar nueva tarea
     form(action="/add", method="POST", class="formAgregar")
       input(type="text", name="taskTitle", placeholder="Ingrese una nueva tarea", class="inputTarea")
+      input(type="date", name="taskDeadline", class=" fecha", required)
       button(type="submit", class="btnAgregar") Agregar Tarea
 
     if tasks.length > 0
@@ -17,8 +18,7 @@ block content
           each task in tasks
             li
               i.toggle-icon.fa(class=`${task.completed ? 'fa-check' : 'fa-hourglass-half'}`, data-task-id=task.id, style="cursor: pointer;")
-              span= task.title + (task.completed ? ' (Completada)' : ' (Pendiente)')
-              // Agregar el icono de trash para eliminar la tarea
+              span= task.title + (task.completed ? ' (Completada)' : ' (Pendiente)') + ' - Fecha Limite: ' + task.FechaLimite
               i.fa.fa-trash(
                 style="color: red; margin-left: 10px; cursor: pointer;",
                 onclick=`deleteTask('${task.id}')`

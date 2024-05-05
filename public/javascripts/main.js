@@ -39,3 +39,38 @@ const deleteTask = async (taskId) => {
     console.error('Error deleting task:', error);
   }
 };
+
+// Enviar datos del formulario al backend
+const form = document.querySelector('.formAgregar');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const taskTitle = form.querySelector('input[name="taskTitle"]').value;
+  const taskDeadline = form.querySelector('input[name="taskDeadline"]').value;
+
+  // Obtener la fecha actual en formato YYYY-MM-DD
+  const today = new Date().toISOString().split('T')[0];
+
+  if (taskDeadline < today) {
+    alert('La fecha límite no puede ser anterior al día actual.');
+    return;
+  }
+
+  try {
+    const response = await fetch('/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ taskTitle, taskDeadline })
+    });
+
+    if (response.ok) {
+      window.location.reload(); // Recargar la página después de agregar la tarea
+    } else {
+      console.error('Error al agregar tarea');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
+
