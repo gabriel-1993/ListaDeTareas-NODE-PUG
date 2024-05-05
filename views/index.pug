@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  section.contenedor
+    h1
+      i.fa-solid.fa-list-check
+      |  To Do List NODE
+
+    // Formulario para agregar nueva tarea
+    form(action="/add", method="POST", class="formAgregar")
+      input(type="text", name="taskTitle", placeholder="Ingrese una nueva tarea", class="inputTarea")
+      button(type="submit", class="btnAgregar") Agregar Tarea
+
+    if tasks.length > 0
+      .divTareas
+        ul
+          each task in tasks
+            li
+              i.toggle-icon.fa(class=`${task.completed ? 'fa-check' : 'fa-hourglass-half'}`, data-task-id=task.id, style="cursor: pointer;")
+              span= task.title + (task.completed ? ' (Completada)' : ' (Pendiente)')
+              // Agregar el icono de trash para eliminar la tarea
+              i.fa.fa-trash(
+                style="color: red; margin-left: 10px; cursor: pointer;",
+                onclick=`deleteTask('${task.id}')`
+              )
+    else
+      p.pMsjSinTareas Lista vacía, no hay tareas agregadas...
+
+  // Incluir el archivo JavaScript para manejar la funcionalidad de los iconos
+  script(src="/javascripts/main.js")
